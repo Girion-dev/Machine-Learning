@@ -39,8 +39,6 @@ X = data(:, 1:2);
 y = data(:, 3);
 m = length(y);
 
-X = [ones(m, 1), data(:,1)]; % Add a column of ones to x
-
 % Print out some data points
 fprintf('First 10 examples from the dataset: \n');
 fprintf(' x = [%.0f %.0f], y = %.0f \n', [X(1:10,:) y(1:10,:)]');

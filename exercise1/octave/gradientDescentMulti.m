@@ -19,12 +19,12 @@ for iter = 1:num_iters
 
 
 
-
-
-
-
-
-
+    temp = X * theta;
+    error = temp - y;
+    newX = error' * X;
+    theta = theta - ((alpha/m) * newX');
+    %Vectorized
+    %theta = theta - alpha * (1 / m) * (((X * theta) - y)' * X)';
 
 
     % ============================================================

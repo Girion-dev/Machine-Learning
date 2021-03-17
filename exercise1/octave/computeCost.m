@@ -21,8 +21,13 @@ endfor
 
 J = (1 / (2 * m)) * mySum;
 
-%Vectorized
-J = (1 / (2 * m)) * sum((X * theta - y) .^ 2); 
+%Vectorized 
+h = (X * theta);
+error = h - y;
+error_sqr = error .^ 2;
+s = sum(error_sqr);
+
+J = (1 / (2 * m)) * s; 
 
 % =========================================================================
 
