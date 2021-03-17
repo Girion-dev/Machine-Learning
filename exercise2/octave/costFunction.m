@@ -20,8 +20,14 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+h = sigmoid(X * theta);
 
+% One of the matrices in each term needs to be transposed to get a multiplication in the form of 1 x m * m  1; to get
+% a result of 1 x 1 - a scalar
 
+J = (1 / m) * (-y' * log(h) - (1 - y') * log(1 - h));
+
+grad = (1 / m) * ((h - y)' * X);
 
 
 
