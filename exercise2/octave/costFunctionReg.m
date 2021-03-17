@@ -17,9 +17,18 @@ grad = zeros(size(theta));
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
 
+h = sigmoid(X * theta);
 
+%Get the unregularized cost function
+[J, grad] = costFunction(theta, X, y);
 
+% Remove the bias feature
+thetaReg = theta;
+thetaReg(1) = 0;
 
+J = J + (lambda / (2 * m)) * sum(thetaReg .^ 2);
+
+grad = grad + ((lambda / m) * thetaReg');
 
 
 % =============================================================
