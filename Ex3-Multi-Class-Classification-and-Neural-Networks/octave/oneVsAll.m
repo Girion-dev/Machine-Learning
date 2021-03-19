@@ -49,7 +49,18 @@ X = [ones(m, 1) X];
 %                 initial_theta, options);
 %
 
+% For each of the output labels/class
+for c = 1:num_labels
+  
+  % Get the theta parameters for the class
+  initial_theta = zeros(n + 1, 1);
+  options = optimset('GradObj', 'on', 'MaxIter', 50);
+  [theta] = fmincg (@(t) (lrCostFunction(t, X, (y == c), lambda)), initial_theta, options);
+  
+  % Save it in a matrix in a row
+  all_theta(c, :) = theta';
 
+endfor
 
 
 
