@@ -22,6 +22,21 @@ p = zeros(size(X, 1), 1);
 %
 
 
+% Add the bias unit to X
+X = [ones(m, 1) X];
+a1 = X;
+
+z2 = a1 * Theta1';
+a2 = sigmoid(z2);
+a2 = [ones(m, 1) a2];
+
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
+
+[max_values indices] = max(a3, [], 2);
+
+p = p + indices;
+
 
 
 

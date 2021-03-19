@@ -34,7 +34,6 @@ X = [ones(m, 1) X];
 % Get the logistic values for each image, using the parameters matrix
 A = sigmoid(X * all_theta');
 
-display(A(1:5, :));
 [max_values indices] = max(A, [], 2);
 
 p = p + indices;
