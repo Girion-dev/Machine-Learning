@@ -70,6 +70,7 @@ y_matrix = eye(num_labels)(y,:);
 X = [ones(m, 1) X];
 
 a1 = X;
+
 z2 = a1 * Theta1';
 a2 = sigmoid(z2);
 a2 = [ones(m, 1) a2];
@@ -79,15 +80,43 @@ a3 = sigmoid(z3);
 
 J = (1 / m) * sum(sum((-y_matrix .* log(a3) - (1 - y_matrix) .* log(1 - a3))));
 
-
+%Remove the bias unit
 Theta1Reg = Theta1(:,2:size(Theta1,2));
-
 Theta2Reg = Theta2(:,2:size(Theta2,2));
 
 regularization = (lambda / (2 * m)) * (sum(sum(Theta1Reg .^ 2)) + sum(sum(Theta2Reg .^ 2)));
-
 J = J + regularization;
 
+%Backpropagation
+Delta1 = 0;
+Delta2 = 0;
+for i = 1:m
+   %Step 1
+   a1 = X(i,:)';
+   z2 = Theta1 * a1;
+   a2 = [1; sigmoid(z2)];
+   z3 = Theta2 * a2;
+   a3 = sigmoid(z3);
+   
+   %Step 2
+   d3 = a3 - y_matrix(i,:)';
+   
+   %Step 3
+   d2 = (Theta2(:, 2:end)' * d3) .* sigmoidGradient(z2); %Theta2 without bias
+   
+   %Step 4
+   Delta2 += d3 * a2';
+   Delta1 += d2 * a1';
+   
+end
+
+%Step 5
+Theta1_grad = (1 / m) * Delta1;
+Theta2_grad = (1 / m) * Delta2;
+
+%Regularization
+Theta1_grad(:,2:end) += lambda / m * Theta1(:, 2:end);
+Theta2_grad(:,2:end) += lambda / m * Theta2(:, 2:end);
 
 
 % -------------------------------------------------------------
