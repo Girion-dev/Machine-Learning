@@ -30,6 +30,8 @@ J = 0;
 Theta1_grad = zeros(size(Theta1));
 Theta2_grad = zeros(size(Theta2));
 
+
+
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the
 %               following parts.
@@ -62,21 +64,29 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+y_matrix = eye(num_labels)(y,:);
+
+% Add the bias unit to X
+X = [ones(m, 1) X];
+
+a1 = X;
+z2 = a1 * Theta1';
+a2 = sigmoid(z2);
+a2 = [ones(m, 1) a2];
+
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
+
+J = (1 / m) * sum(sum((-y_matrix .* log(a3) - (1 - y_matrix) .* log(1 - a3))));
 
 
+Theta1Reg = Theta1(:,2:size(Theta1,2));
 
+Theta2Reg = Theta2(:,2:size(Theta2,2));
 
+regularization = (lambda / (2 * m)) * (sum(sum(Theta1Reg .^ 2)) + sum(sum(Theta2Reg .^ 2)));
 
-
-
-
-
-
-
-
-
-
-
+J = J + regularization;
 
 
 
