@@ -27,7 +27,8 @@ thetaReg(1) = 0;
 
 J = J + (lambda / (2 * m)) * sum(thetaReg .^ 2);
 
-
+grad = (1 / m) * (((X * theta) - y)' * X);
+grad = grad + ((lambda / m) * thetaReg');
 
 
 
