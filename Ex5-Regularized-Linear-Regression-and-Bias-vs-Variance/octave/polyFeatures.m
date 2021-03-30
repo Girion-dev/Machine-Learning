@@ -19,7 +19,7 @@ X_poly = zeros(numel(X), p);
 for i = 1:p
   %Get the first column from X and copy it into ith column
   %of X_poly, with each value in the column being .^ i
-  X_poly(:, i) = X(:, 1) .^ i
+  X_poly(:, i) = X(:, 1) .^ i;
 endfor
 
 
