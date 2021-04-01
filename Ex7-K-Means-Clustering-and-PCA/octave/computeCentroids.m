@@ -26,8 +26,16 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
-
+%For each centroid
+for i = 1:K
+  %Get a vector of training examples that have been assigned to that centroid
+  selection = find(idx == i);
+  %If there are any
+  if (!isnull(selection))
+    %Update the position of the centroid to the mean of these points
+    centroids(i, :) = mean(X(selection, :), 1);
+  endif
+endfor
 
 
 
