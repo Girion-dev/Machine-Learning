@@ -40,9 +40,14 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+%The predicted movie ratings for all users
+predictions = X * Theta';
 
+%Multiply the prediction error with the movie rating
+error_factor = sum(R .* (predictions - Y).^2);
 
-
+%Compute the cost with the given formula
+J = (1 / 2) * sum(error_factor);
 
 
 
