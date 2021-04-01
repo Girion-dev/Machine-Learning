@@ -44,13 +44,16 @@ Theta_grad = zeros(size(Theta));
 predictions = X * Theta';
 
 %Multiply the prediction error with the movie rating
-error_factor = sum(R .* (predictions - Y).^2);
+error_factor = R .* (predictions - Y);
 
 %Compute the cost with the given formula
-J = (1 / 2) * sum(error_factor);
+J = (1 / 2) * sum(sum(error_factor .^ 2));
 
+%X gradient
+X_grad = error_factor * Theta;
 
-
+%Theta gradient
+Theta_grad = error_factor' * X;
 
 
 
