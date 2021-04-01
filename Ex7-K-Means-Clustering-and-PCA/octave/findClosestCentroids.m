@@ -22,10 +22,20 @@ idx = zeros(size(X,1), 1);
 %
 
 
+distances = zeros(size(X, 1), K); %m x K
 
+%Loop over all centroids
+for i = 1:K
+  %Get the distance from each training example to the centroid:
+  %   c1  c2   c3
+  %x1 _   _    _
+  %x2 _   _    _
+  distances(:, i) = sum(bsxfun(@minus, X, centroids(i, :)).^2, 2);
+endfor
 
-
-
+%Get the column with the smallest distance
+[mins columns] = min(distances, [], 2);
+idx = columns;
 
 % =============================================================
 
